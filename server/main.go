@@ -2,9 +2,11 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/gommon/log"
@@ -74,10 +76,21 @@ func getTodos(c echo.Context) error {
 // Sample: /todo/1
 func getTodo(c echo.Context) error {
 	// todo ID from path `todo/:id`
-	id := c.Param("id")
-	c.Logger().Debug("GET for todo from " + c.Request().RemoteAddr + " id:" + id)
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.Logger().Error("Get for id failed on " + c.Param("id"))
+		return c.HTML(http.StatusBadRequest, "Get for id failed on "+c.Param("id"))
+	}
 
-	return c.JSON(http.StatusOK, "{hi:`Hello "+id+"`}")
+	c.Logger().Debug(fmt.Sprintf("GET for todo from %s for id:%d", c.Request().RemoteAddr, id))
+
+	if id > 2 || id <= 0 {
+		// for the sample we only consider 2 items
+		c.Logger().Error(fmt.Sprintf("%d not found", id))
+		return c.HTML(http.StatusNotFound, fmt.Sprintf("%d not found", id))
+	}
+
+	return c.JSON(http.StatusOK, todoList.Todos[id-1])
 }
 
 func main() {
