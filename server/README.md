@@ -60,6 +60,15 @@ This will run a containerized version of the server
 make drun
 ```
 
+Alternatively, you can run
+
+```shell
+make container
+```
+
+which will build and run the container for you in one step
+
+
 ### Get Status
 
 A status endpoint allows us to check the current status of our microservice. This comes in handy when using an orchestrator such as Kubernetes or Docker-compose.
