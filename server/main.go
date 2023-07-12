@@ -39,11 +39,7 @@ var (
 func getStatus(c echo.Context) error {
 	c.Logger().Info("GET for status from " + c.Request().RemoteAddr)
 
-	type statusResponse struct {
-		Message string `json:"message"`
-	}
-
-	return c.JSON(http.StatusOK, statusResponse{Message: "OK"})
+	return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
 }
 
 // used to get a webpage that shows all the todos
