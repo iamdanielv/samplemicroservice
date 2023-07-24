@@ -150,3 +150,12 @@ The sample dockerfile shows some BKMs, such as:
 * Using a `.dockerignore` file to tell docker build context to ignore certain files - Learn more at [.dockerignore Documentation](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
 
 For even more BKMs, check out [Docker's Best Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+
+### Code BKMs
+
+The sample `main.go` shows some BKMs, such as:
+
+* Using configuration from ENV (environment) variables
+* Using a Logging framework
+* Exposing services via port binding
+* Declare Dependencies - GoLang uses `go.mod` and `go.sum` for this
