@@ -121,16 +121,14 @@ func main() {
 	// e.Logger.Debug("Some debug")
 	// e.Logger.Error("Some error")
 	// e.Logger.Warn("Some warn")
-	indexTemplate = template.Must(template.ParseFiles("templates/index.gohtml"))
 
-	// e.Logger.Info("some info")
-	// e.Logger.Debug("Some debug")
-	// e.Logger.Error("some error")
-	// e.Logger.Warn("some warn")
+	e.Logger.Info("Getting HTML templates")
+	indexTemplate = template.Must(template.ParseFiles("templates/index.gohtml"))
 
 	// share our static resources / files
 	e.Static("/resources", "resources")
 
+	// setup the endpoints
 	e.GET("/", getIndex)
 	e.GET("/status", getStatus)
 	e.GET("/todos", getTodos)
@@ -140,9 +138,9 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
-		//log.Print("No port specified, defaulting to " + port)
+		e.Logger.Info("No port specified, defaulting to " + port)
 	} else {
-		//log.Print("Using port " + port + " from environment")
+		e.Logger.Info("Using port " + port + " from environment")
 	}
 
 	// start the server
