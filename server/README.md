@@ -138,3 +138,14 @@ Links to try:
 You should check out the `Makefile` to see the different options available.
 
 > **Note:** try running `make help` to get a list of options
+
+### Dockerfile BKMs
+
+the sample dockerfile shows some BKMs, such as:
+
+* Using a multi-stage build - Learn more at [Docker's Documentation for Multi-stage builds](https://docs.docker.com/build/building/multi-stage/)
+* Running as non-root user
+* Using ENV (environment) variables 
+* Using the EXPOSE keyword to hint the exposed/expected ports
+
+For even more BKMs, check out [Docker's Best Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
