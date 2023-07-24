@@ -143,11 +143,11 @@ You should check out the `Makefile` to see the different options available.
 
 The sample dockerfile shows some BKMs, such as:
 
-* Using a multi-stage build - Learn more at [Docker's Documentation for Multi-stage builds](https://docs.docker.com/build/building/multi-stage/)
-* Running as non-root user
-* Using ENV (environment) variables 
-* Using the EXPOSE keyword to hint the exposed/expected ports
-* Using a `.dockerignore` file to tell docker build context to ignore certain files - Learn more at [.dockerignore Documentation](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
+* Using a **multi-stage build** - Learn more at [Docker's Documentation for Multi-stage builds](https://docs.docker.com/build/building/multi-stage/)
+* Running as **non-root user**
+* Using **ENV** (environment) variables 
+* Using the **EXPOSE** keyword to hint the exposed/expected ports
+* Using a **`.dockerignore`** file to tell docker build context to ignore certain files - Learn more at [.dockerignore Documentation](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
 
 For even more BKMs, check out [Docker's Best Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
@@ -155,7 +155,7 @@ For even more BKMs, check out [Docker's Best Practices](https://docs.docker.com/
 
 The sample `main.go` shows some BKMs, such as:
 
-* Using configuration from ENV (environment) variables
-* Using a Logging framework
-* Exposing services via port binding
-* Declare Dependencies - GoLang uses `go.mod` and `go.sum` for this
+* Using **configuration from ENV** (environment) variables
+* Using a **Logging** framework
+* Exposing services via **port binding**
+* Declare **Dependencies** - GoLang uses `go.mod` and `go.sum` for this
