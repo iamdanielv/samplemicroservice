@@ -105,12 +105,22 @@ func main() {
 	e := echo.New()
 	// we don't need to have the echo banner show up every time
 	e.HideBanner = true
+
+	//***************************
+	// Logging Setup and Example
+	//***************************
 	// set the log level to debug so we can see all messages
 	e.Logger.SetLevel(log.DEBUG)
 	// change the logger to be human readable
+	// you can comment this line out to use JSON and a logging service
+	// but for this example it is easier to monitor the command line
 	e.Logger.SetHeader("${time_rfc3339} ${level}\t")
 
-	e.Logger.Info("Getting templates")
+	// sample of how to log different types of messages
+	// e.Logger.Info("Some info")
+	// e.Logger.Debug("Some debug")
+	// e.Logger.Error("Some error")
+	// e.Logger.Warn("Some warn")
 	indexTemplate = template.Must(template.ParseFiles("templates/index.gohtml"))
 
 	// e.Logger.Info("some info")
