@@ -25,6 +25,7 @@ and compile your source.
 >**Note:** You may have to call `go mod download` first
 
 ### Compiling inside of a Docker Container
+
 In order to compile inside of a Docker Container, you can run
 
 ```shell
@@ -38,7 +39,6 @@ docker build -t samplemicroservice .
 ```
 
 which will run the build process inside of a docker container. With this command, you don't have to install the golang compiler on your machine.
-
 
 ## Running the Sample
 
@@ -68,7 +68,6 @@ make container
 
 which will build and run the container for you in one step
 
-
 ### Get Status
 
 A status endpoint allows us to check the current status of our microservice. This comes in handy when using an orchestrator such as Kubernetes or Docker-compose.
@@ -83,10 +82,9 @@ curl http://localhost:8080/status
 
 and get output similar to:
 
-```
+```json
 {"message":"OK"}
 ```
-
 
 ### Get a webpage of all TODO items
 
@@ -132,7 +130,6 @@ Links to try:
 - [http://localhost:8080/todo/asd](http://localhost:8080/todo/asd)
 - [http://localhost:8080/todo/-100](http://localhost:8080/todo/-100)
 
-
 ## Exploring the code
 
 You should check out the `Makefile` to see the different options available.
@@ -143,11 +140,11 @@ You should check out the `Makefile` to see the different options available.
 
 The sample dockerfile shows some BKMs, such as:
 
-* Using a **multi-stage build** - Learn more at [Docker's Documentation for Multi-stage builds](https://docs.docker.com/build/building/multi-stage/)
-* Running as **non-root user**
-* Using **ENV** (environment) variables 
-* Using the **EXPOSE** keyword to hint the exposed/expected ports
-* Using a **`.dockerignore`** file to tell docker build context to ignore certain files - Learn more at [.dockerignore Documentation](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
+- Using a **multi-stage build** - Learn more at [Docker's Documentation for Multi-stage builds](https://docs.docker.com/build/building/multi-stage/)
+- Running as **non-root user**
+- Using **ENV** (environment) variables
+- Using the **EXPOSE** keyword to hint the exposed/expected ports
+- Using a **`.dockerignore`** file to tell docker build context to ignore certain files - Learn more at [.dockerignore Documentation](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
 
 For even more BKMs, check out [Docker's Best Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
@@ -155,7 +152,7 @@ For even more BKMs, check out [Docker's Best Practices](https://docs.docker.com/
 
 The sample `main.go` shows some BKMs, such as:
 
-* Using **configuration from ENV** (environment) variables
-* Using a **Logging** framework
-* Exposing services via **port binding**
-* Declare **Dependencies** - GoLang uses `go.mod` and `go.sum` for this
+- Using **configuration from ENV** (environment) variables
+- Using a **Logging** framework
+- Exposing services via **port binding**
+- Declare **Dependencies** - GoLang uses `go.mod` and `go.sum` for this
