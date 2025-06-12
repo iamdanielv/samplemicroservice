@@ -2,7 +2,7 @@
 
 .DEFAULT_GOAL := help
 
-.PHONY: help drun dbuild dstop container dstat dlog view
+.PHONY: help build dbuild run drun dstop container dstat dlog view
 help: ## show help contents
 	@printf "\033[36m%-10s\033[0m %s\n" "Target" "Description"
 	@printf "%-10s %s\n" "------" "-----------"
@@ -12,27 +12,27 @@ build: ## build the sample server
 	@echo "Building the Sample server"
 	@go build -o bin/sampleserver
 
-dbuild: ## build the sample server using a docker container
-	@echo "Building the Sample server in docker"
+dbuild: ## build the sample server using a Docker container
+	@echo "Building the Sample server in Docker"
 	@docker build -t samplemicroservice .
 
 run: build ## build and run the sample
 	@echo "Running the Sample server"
 	@bin/sampleserver
 
-drun: ## run the sample server in a docker container
-	@echo "Running the Sample server in docker"
+drun: ## run the sample server in a Docker container
+	@echo "Running the Sample server in Docker"
 	@# the following command will remove a container if it exists
 	@# and ignore any errors
 	-@docker rm -f sampleserver
 	@docker run -p 8080:8080 -d --name sampleserver samplemicroservice
 
-dstop: ## stop the sample server docker container
-	@echo "Stoping the Sample server running in docker"
+dstop: ## stop the sample server Docker container
+	@echo "Stopping the Sample server running in Docker"
 	@docker stop sampleserver
 	@docker rm -f sampleserver
 
-container: dbuild drun ## build and run the container using docker
+container: dbuild drun ## build and run the container using Docker
 	@docker ps --filter 'name=sampleserver' --format "{{.Names}} {{.Status}}\n {{.Ports}}"
 
 dstat: ## get the status of the sample server container
