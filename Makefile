@@ -2,7 +2,7 @@
 
 .DEFAULT_GOAL := help
 
-.PHONY: help
+.PHONY: help view buildall
 help: ## show help contents
 	@printf "\033[36m%-10s\033[0m %s\n" "Target" "Description"
 	@printf "%-10s %s\n" "------" "-----------"
@@ -13,7 +13,6 @@ view: ## view folder structure
 	@sh -c 'command -v tree > /dev/null || (printf "\033[1;31mtree is not installed\033[0m\n" && exit 1)&& tree -a'
 
 
-.PHONY: buildall
 buildall: ## run make in all sub directories
 	@for dir in client/ server/; do \
 		if [ -d "$$dir" ]; then \
