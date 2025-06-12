@@ -2,7 +2,7 @@
 
 .DEFAULT_GOAL := help
 
-.PHONY: help
+.PHONY: help view build
 help: ## show help contents
 	@printf "\033[36m%-10s\033[0m %s\n" "Target" "Description"
 	@printf "%-10s %s\n" "------" "-----------"
@@ -10,7 +10,8 @@ help: ## show help contents
 
 
 view: ## view folder structure
-	@tree
+	@sh -c 'command -v tree > /dev/null || (printf "\033[1;31mtree is not installed\033[0m\n" && exit 1)&& tree -a'
+
 
 build: ## build the sample client
 	@echo "Sample client is not finished yet..."
