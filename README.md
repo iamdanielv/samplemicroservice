@@ -1,10 +1,24 @@
-# samplemicroservice
+# Sample Microservice Implementation with GoLang and Docker
 
-A sample microservice implementation with goLang and docker
+This repository contains a sample microservice implementation using GoLang and Docker. It includes both server and client portions, though the client is not yet implemented.
 
 ## Code Layout
 
-The code is split into server and client portions
-> Note: The client is not currently implemented, you can use a web browser to test the server
+The code is organized into two main directories:
 
-Go into the server folder and type `make help` to get a list of available commands.
+- `server`: Contains the server logic.
+- `client`: Placeholder for client-side code (currently not implemented).
+
+To get started with the server, navigate to the `server` directory and run the following in a terminal:
+
+```sh
+make help
+```
+
+This command will provide a list of available Make commands to get you started.
+
+## Next Steps
+
+**Have fun exploring!** Your journey into the world of microservices with GoLang and Docker is just beginning!
+
+Let me know if you have any questions. I can be reached at [@IAmDanielV](https://twitter.com/IAmDanielV) or [@iamdanielv.bsky.social](https://bsky.app/profile/iamdanielv.bsky.social).
