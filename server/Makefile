@@ -46,4 +46,4 @@ dlog: check-docker ## tail the logs of the sample server container
 	@docker logs sampleserver -f
 
 view: ## view folder structure
-	@tree
+	@sh -c 'command -v tree > /dev/null || (printf "\033[1;31mtree is not installed\033[0m\n" && exit 1)&& tree -a'
