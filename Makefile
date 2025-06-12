@@ -15,5 +15,9 @@ view: ## view folder structure
 
 .PHONY: buildall
 buildall: ## run make in all sub directories
-	$(MAKE) -C client/ build
-	$(MAKE) -C server/ build
+	@for dir in client/ server/; do \
+		if [ -d "$$dir" ]; then \
+			printf "\n=== Building \033[36m$$dir \033[0m===\n"; \
+			$(MAKE) --no-print-directory -C "$$dir" build || exit 1; \
+		fi; \
+	done
