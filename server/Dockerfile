@@ -3,7 +3,7 @@ ARG BUILDER_IMAGE=golang:alpine
 #####################
 # BUILD environment #
 #####################
-FROM ${BUILDER_IMAGE} as builder
+FROM ${BUILDER_IMAGE} AS builder
 
 RUN apk update && apk add --no-cache ca-certificates tzdata && update-ca-certificates
 
