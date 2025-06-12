@@ -10,7 +10,7 @@ help: ## show help contents
 
 
 view: ## view folder structure
-	@tree
+	@sh -c 'command -v tree > /dev/null || (printf "\033[1;31mtree is not installed\033[0m\n" && exit 1)&& tree -a'
 
 
 .PHONY: buildall
