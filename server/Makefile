@@ -2,7 +2,7 @@
 
 .DEFAULT_GOAL := help
 
-.PHONY: check-docker help build dbuild run drun dstop container dstat dlog view
+.PHONY: check-docker help build dbuild run drun dstop container dstat dlog view test
 
 check-docker:
 	@command -v docker >/dev/null 2>&1 || { echo >&2 "\033[1;31mDocker is not installed. Please install Docker and try again.\033[0m"; exit 1; }
@@ -47,3 +47,7 @@ dlog: check-docker ## tail the logs of the sample server container
 
 view: ## view folder structure
 	@sh -c 'command -v tree > /dev/null || (printf "\033[1;31mtree is not installed\033[0m\n" && exit 1)&& tree -a'
+
+test: ## run Go tests
+	@printf "Running \033[33mtests...\033[0m\n"
+	@go test ./...

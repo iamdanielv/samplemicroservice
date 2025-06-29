@@ -2,7 +2,8 @@
 
 .DEFAULT_GOAL := help
 
-.PHONY: help view buildall
+.PHONY: help view buildall testall
+
 help: ## show help contents
 	@printf "\033[36m%-10s\033[0m %s\n" "Target" "Description"
 	@printf "%-10s %s\n" "------" "-----------"
@@ -18,5 +19,16 @@ buildall: ## run make in all sub directories
 		if [ -d "$$dir" ]; then \
 			printf "\n=== Building \033[36m$$dir \033[0m===\n"; \
 			$(MAKE) --no-print-directory -C "$$dir" build || exit 1; \
+			echo ""; \
+		fi; \
+	done
+
+
+testall: ## run test in all sub directories
+	@for dir in client/ server/; do \
+		if [ -d "$$dir" ]; then \
+			printf "\n=== Testing \033[36m$$dir \033[0m===\n"; \
+			$(MAKE) --no-print-directory -C "$$dir" test || exit 1; \
+			echo ""; \
 		fi; \
 	done
