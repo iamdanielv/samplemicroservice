@@ -9,13 +9,43 @@ The code is organized into two main directories:
 - `server`: Contains the server logic.
 - `client`: Placeholder for client-side code (currently not implemented).
 
-To get started with the server, navigate to the `server` directory and run the following in a terminal:
+## Makefile Targets
+
+This command will provide a list of available Make commands to get you started:
 
 ```sh
 make help
 ```
 
-This command will provide a list of available Make commands to get you started.
+### Server Directory (`server/Makefile`)
+
+- **help**: Show help contents.
+- **check-docker**: Check if Docker is installed.
+- **build**: Build the sample server.
+- **dbuild**: Build the sample server using a Docker container.
+- **run**: Build and run the sample.
+- **drun**: Run the sample server in a Docker container.
+- **dstop**: Stop the sample server Docker container.
+- **container**: Build and run the container using Docker.
+- **dstat**: Get the status of the sample server container.
+- **dlog**: Tail the logs of the sample server container.
+- **view**: View folder structure.
+- **test**: Run Go tests.
+
+### Client Directory (`client/Makefile`)
+
+- **help**: Show help contents.
+- **check-docker**: Check if Docker is installed.
+- **build**: Build the sample client (not yet implemented).
+- **test**: Run tests for the sample client (not yet implemented).
+
+## Folder structure
+
+To view the folder structure, you can use:
+
+```sh
+make view
+```
 
 ## Next Steps
 
