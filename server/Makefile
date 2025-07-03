@@ -8,45 +8,50 @@ check-docker:
 	@command -v docker >/dev/null 2>&1 || { echo >&2 "\033[1;31mDocker is not installed. Please install Docker and try again.\033[0m"; exit 1; }
 
 help: ## show help contents
-	@printf "\033[36m%-10s\033[0m %s\n" "Target" "Description"
-	@printf "%-10s %s\n" "------" "-----------"
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-10s\033[0m %s\n", $$1, $$2}'
+	@printf "$(C_BLUE)%-12s$(T_RESET) %s\n" "Target" "Description"
+	@printf "%-12s %s\n" "------" "-----------"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-12s\033[0m %s\n", $$1, $$2}'
 
 build: ## build the sample server
-	@echo "Building the Sample server"
+	@echo "🏗️  Building the Sample server..."
 	@go build -o bin/sampleserver
 
-dbuild: check-docker ## build the sample server using a Docker container
-	@echo "Building the Sample server in Docker"
+dbuild: check-docker  ## build the sample server using a Docker container
+	@printf "🐳 Building the Sample server in Docker...\n"
 	@docker build -t samplemicroservice .
 
 run: build ## build and run the sample
-	@echo "Running the Sample server"
+	@printf "🚀 Running the Sample server...\n"
 	@bin/sampleserver
 
 drun: check-docker ## run the sample server in a Docker container
-	@echo "Running the Sample server in Docker"
+	@printf "🐳🚀 Running the Sample server in Docker...\n"
 	@# the following command will remove a container if it exists
 	@# and ignore any errors
 	-@docker rm -f sampleserver
 	@docker run -p 8080:8080 -d --name sampleserver samplemicroservice
 
 dstop: check-docker ## stop the sample server Docker container
-	@echo "Stopping the Sample server running in Docker"
+	@printf "🛑 Stopping the Sample server in Docker...\n"
 	@docker stop sampleserver
 	@docker rm -f sampleserver
 
 container: check-docker dbuild drun ## build and run the container using Docker
-	@docker ps --filter 'name=sampleserver' --format "{{.Names}} {{.Status}}\n {{.Ports}}"
+	@printf "🐳 Sample Server container status:\n"
+	@docker ps --filter 'name=sampleserver' --format "  \033[32m{{.Names}}\033[0m: {{.Status}} (Ports: {{.Ports}})\n" || printf "  Container not found.\n"
+
 
 dstat: check-docker ## get the status of the sample server container
-	@docker ps --filter 'name=sampleserver' --format "{{.Names}} {{.Status}}\n {{.Ports}}"
+	@docker ps --filter 'name=sampleserver' --format "{{.Names}} {{.Status}}\n {{.Ports}}\n"
 
 dlog: check-docker ## tail the logs of the sample server container
 	@docker logs sampleserver -f
 
 view: ## view folder structure
-	@sh -c 'command -v tree > /dev/null || (printf "\033[1;31mtree is not installed\033[0m\n" && exit 1)&& tree -a'
+	@printf "📁 Directory structure:\n"
+	@# Check if tree command is available, if not print an error message
+	@sh -c 'command -v tree > /dev/null || (printf "\033[1;31mtree is not installed\033[0m\n" && exit 1)'
+	@tree
 
 test: ## run Go tests
 	@printf "Running \033[33mtests...\033[0m\n"
