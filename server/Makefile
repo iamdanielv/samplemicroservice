@@ -1,16 +1,12 @@
 # The help comments are Based on https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 
+# Include shared color definitions
+include ../utils/colors.mk
+include ../utils/common.mk
+
 .DEFAULT_GOAL := help
 
-.PHONY: check-docker help build dbuild run drun dstop container dstat dlog view test
-
-check-docker:
-	@command -v docker >/dev/null 2>&1 || { echo >&2 "\033[1;31mDocker is not installed. Please install Docker and try again.\033[0m"; exit 1; }
-
-help: ## show help contents
-	@printf "$(C_BLUE)%-12s$(T_RESET) %s\n" "Target" "Description"
-	@printf "%-12s %s\n" "------" "-----------"
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-12s\033[0m %s\n", $$1, $$2}'
+.PHONY: build dbuild run drun dstop container dstat dlog test
 
 build: ## build the sample server
 	@echo "🏗️  Building the Sample server..."
@@ -38,7 +34,7 @@ dstop: check-docker ## stop the sample server Docker container
 
 container: check-docker dbuild drun ## build and run the container using Docker
 	@printf "🐳 Sample Server container status:\n"
-	@docker ps --filter 'name=sampleserver' --format "  \033[32m{{.Names}}\033[0m: {{.Status}} (Ports: {{.Ports}})\n" || printf "  Container not found.\n"
+	@docker ps --filter 'name=sampleserver' --format "  $(C_GREEN){{.Names}}$(T_RESET): {{.Status}} (Ports: {{.Ports}})\n" || printf "  Container not found.\n"
 
 
 dstat: check-docker ## get the status of the sample server container
@@ -47,12 +43,6 @@ dstat: check-docker ## get the status of the sample server container
 dlog: check-docker ## tail the logs of the sample server container
 	@docker logs sampleserver -f
 
-view: ## view folder structure
-	@printf "📁 Directory structure:\n"
-	@# Check if tree command is available, if not print an error message
-	@sh -c 'command -v tree > /dev/null || (printf "\033[1;31mtree is not installed\033[0m\n" && exit 1)'
-	@tree
-
 test: ## run Go tests
-	@printf "Running \033[33mtests...\033[0m\n"
+	@printf "Running $(C_YELLOW)tests...$(T_RESET)\n"
 	@go test ./...
